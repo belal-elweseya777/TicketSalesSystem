@@ -3,21 +3,35 @@ import java.net.*;
 
 public class Server {
     private static final int PORT = 5000;
+    private static TicketManager manager = new TicketManager();
 
     public static void main(String[] args) {
-        TicketManager manager = new TicketManager();
         System.out.println("=== Ticket Sales Server Running on Port " + PORT + " ===");
 
         try (ServerSocket serverSocket = new ServerSocket(PORT)) {
             while (true) {
                 Socket socket = serverSocket.accept();
-                System.out.println("Client connected!");
+                new ClientHandler(socket).start();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-                BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+    private static class ClientHandler extends Thread {
+        private Socket socket;
 
-                String request = in.readLine();
-                if (request != null) {
+        public ClientHandler(Socket socket) {
+            this.socket = socket;
+        }
+
+        @Override
+        public void run() {
+            try (BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true)) {
+
+                String request;
+                while ((request = in.readLine()) != null) {
                     String[] parts = request.split(" ");
                     String command = parts[0];
 
@@ -39,10 +53,9 @@ public class Server {
                         out.println("UNKNOWN COMMAND");
                     }
                 }
-                socket.close();
+            } catch (IOException e) {
+                // Client disconnected
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 }

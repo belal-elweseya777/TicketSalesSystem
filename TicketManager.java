@@ -13,10 +13,12 @@ public class TicketManager {
     private void loadTicketsFromFile() {
         File file = new File(FILE_NAME);
         if (!file.exists()) {
-            // إضافة بيانات أولية لو الملف مش موجود
-            tickets.add(new Ticket(101, "Cinema: Avengers", 15.0));
-            tickets.add(new Ticket(102, "Cinema: Avengers", 15.0));
-            tickets.add(new Ticket(201, "Concert: Rock Band", 50.0));
+            for (int i = 1; i <= 20; i++) {
+                int id = 100 + i;
+                String event = (i <= 10) ? "Cinema Ticket #" + i : "Match Ticket #" + i;
+                double price = 25.0;
+                tickets.add(new Ticket(id, event, price));
+            }
             saveTicketsToFile();
             return;
         }
@@ -60,7 +62,7 @@ public class TicketManager {
         for (Ticket t : tickets) {
             if (t.getId() == ticketId && !t.isBooked()) {
                 t.setBooked(true);
-                saveTicketsToFile(); // حفظ تلقائي في الملف
+                saveTicketsToFile();
                 return true;
             }
         }
@@ -71,7 +73,7 @@ public class TicketManager {
         for (Ticket t : tickets) {
             if (t.getId() == ticketId && t.isBooked()) {
                 t.setBooked(false);
-                saveTicketsToFile(); // حفظ تلقائي في الملف
+                saveTicketsToFile();
                 return true;
             }
         }

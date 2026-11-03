@@ -39,7 +39,7 @@ public class Client extends JFrame {
         JPanel controlPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 15));
         controlPanel.setBackground(new Color(220, 221, 225));
 
-        JButton viewBtn = new JButton("Refresh / View");
+        JButton viewBtn = new JButton("Search / Refresh");
         viewBtn.setBackground(new Color(52, 152, 219));
         viewBtn.setForeground(Color.WHITE);
 
@@ -67,19 +67,24 @@ public class Client extends JFrame {
 
         connectToServer();
 
-        viewBtn.addActionListener(e -> sendCommand("VIEW"));
+        viewBtn.addActionListener(e -> {
+            String inputId = idField.getText().trim();
+            sendCommand("VIEW", inputId);
+        });
+
         bookBtn.addActionListener(e -> {
             if (!idField.getText().trim().isEmpty()) {
-                sendCommand("BOOK " + idField.getText().trim());
-            }
-        });
-        cancelBtn.addActionListener(e -> {
-            if (!idField.getText().trim().isEmpty()) {
-                sendCommand("CANCEL " + idField.getText().trim());
+                sendCommand("BOOK " + idField.getText().trim(), "");
             }
         });
 
-        sendCommand("VIEW");
+        cancelBtn.addActionListener(e -> {
+            if (!idField.getText().trim().isEmpty()) {
+                sendCommand("CANCEL " + idField.getText().trim(), "");
+            }
+        });
+
+        sendCommand("VIEW", "");
     }
 
     private void connectToServer() {
@@ -92,7 +97,7 @@ public class Client extends JFrame {
         }
     }
 
-    private void sendCommand(String command) {
+    private void sendCommand(String command, String searchId) {
         try {
             if (socket == null || socket.isClosed()) {
                 connectToServer();
@@ -104,12 +109,31 @@ public class Client extends JFrame {
             if (command.startsWith("VIEW") && response != null) {
                 displayArea.setText("");
                 String[] tickets = response.split(";");
+                String foundStatus = null;
+
                 for (String t : tickets) {
                     displayArea.append(" " + t + "\n-----------------------------------------------------\n");
+                    
+                    if (!searchId.isEmpty() && t.contains("Ticket ID: " + searchId + " ")) {
+                        if (t.contains("Status: BOOKED")) {
+                            foundStatus = "Ticket #" + searchId + " is BOOKED";
+                        } else if (t.contains("Status: AVAILABLE")) {
+                            foundStatus = "Ticket #" + searchId + " is AVAILABLE";
+                        }
+                    }
                 }
+
+                if (!searchId.isEmpty()) {
+                    if (foundStatus != null) {
+                        JOptionPane.showMessageDialog(this, foundStatus, "Ticket Status", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Ticket ID #" + searchId + " Not Found!", "Search Result", JOptionPane.WARNING_MESSAGE);
+                    }
+                }
+
             } else if (response != null) {
                 JOptionPane.showMessageDialog(this, "Server Response: " + response);
-                sendCommand("VIEW");
+                sendCommand("VIEW", "");
             }
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Connection lost to server!", "Error", JOptionPane.ERROR_MESSAGE);

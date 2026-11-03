@@ -1,4 +1,4 @@
-101,Cinema Ticket #1,25.0,true
+101,Cinema Ticket #1,25.0,false
 102,Cinema Ticket #2,25.0,false
 103,Cinema Ticket #3,25.0,false
 104,Cinema Ticket #4,25.0,false
@@ -12,7 +12,7 @@
 112,Match Ticket #12,25.0,false
 113,Match Ticket #13,25.0,false
 114,Match Ticket #14,25.0,false
-115,Match Ticket #15,25.0,true
+115,Match Ticket #15,25.0,false
 116,Match Ticket #16,25.0,false
 117,Match Ticket #17,25.0,false
 118,Match Ticket #18,25.0,false

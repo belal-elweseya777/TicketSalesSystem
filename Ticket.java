@@ -11,15 +11,37 @@ public class Ticket {
         this.isBooked = false;
     }
 
-    public int getId() { return id; }
-    public String getEventName() { return eventName; }
-    public double getPrice() { return price; }
-    public boolean isBooked() { return isBooked; }
+    public int getId() {
+        return id;
+    }
 
-    public void setBooked(boolean booked) { isBooked = booked; }
+    public String getEventName() {
+        return eventName;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public boolean isBooked() {
+        return isBooked;
+    }
+
+    public void setBooked(boolean booked) {
+        this.isBooked = booked;
+    }
 
     @Override
     public String toString() {
-        return "Ticket ID: " + id + " | Event: " + eventName + " | Price: $" + price + " | Status: " + (isBooked ? "BOOKED" : "AVAILABLE");
+        return id + "," + eventName + "," + price + "," + (isBooked ? "BOOKED" : "AVAILABLE");
+    }
+
+    public static Ticket fromString(String line) {
+        String[] parts = line.split(",");
+        Ticket ticket = new Ticket(Integer.parseInt(parts[0]), parts[1], Double.parseDouble(parts[2]));
+        if (parts[3].equalsIgnoreCase("BOOKED")) {
+            ticket.setBooked(true);
+        }
+        return ticket;
     }
 }

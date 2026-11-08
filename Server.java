@@ -6,8 +6,7 @@ public class Server {
     private static TicketManager manager = new TicketManager();
 
     public static void main(String[] args) {
-        System.out.println("=== Ticket Sales Server Running on Port " + PORT + " ===");
-
+        System.out.println("Server started on port " + PORT);
         try (ServerSocket serverSocket = new ServerSocket(PORT)) {
             while (true) {
                 Socket socket = serverSocket.accept();
@@ -44,17 +43,14 @@ public class Server {
                     } else if (command.equalsIgnoreCase("BOOK")) {
                         int id = Integer.parseInt(parts[1]);
                         boolean success = manager.bookTicket(id);
-                        out.println(success ? "SUCCESS: Ticket booked" : "FAILED: Invalid ID or already booked");
+                        out.println(success ? "SUCCESS" : "FAILED");
                     } else if (command.equalsIgnoreCase("CANCEL")) {
                         int id = Integer.parseInt(parts[1]);
                         boolean success = manager.cancelBooking(id);
-                        out.println(success ? "SUCCESS: Booking cancelled" : "FAILED: Invalid ID or not booked");
-                    } else {
-                        out.println("UNKNOWN COMMAND");
+                        out.println(success ? "SUCCESS" : "FAILED");
                     }
                 }
             } catch (IOException e) {
-                // Client disconnected
             }
         }
     }

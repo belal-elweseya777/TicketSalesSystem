@@ -1,20 +1,25 @@
-101,Cinema Ticket #1,25.0,AVAILABLE
-102,Cinema Ticket #2,25.0,BOOKED
-103,Cinema Ticket #3,25.0,AVAILABLE
-104,Cinema Ticket #4,25.0,AVAILABLE
-105,Cinema Ticket #5,25.0,AVAILABLE
-106,Cinema Ticket #6,25.0,AVAILABLE
-107,Cinema Ticket #7,25.0,AVAILABLE
-108,Cinema Ticket #8,25.0,AVAILABLE
-109,Cinema Ticket #9,25.0,AVAILABLE
-110,Cinema Ticket #10,25.0,AVAILABLE
-111,Match Ticket #11,25.0,BOOKED
-112,Match Ticket #12,25.0,BOOKED
-113,Match Ticket #13,25.0,AVAILABLE
-114,Match Ticket #14,25.0,AVAILABLE
-115,Match Ticket #15,25.0,AVAILABLE
-116,Match Ticket #16,25.0,AVAILABLE
-117,Match Ticket #17,25.0,AVAILABLE
-118,Match Ticket #18,25.0,AVAILABLE
-119,Match Ticket #19,25.0,AVAILABLE
-120,Match Ticket #20,25.0,AVAILABLE
+CINEMA,101,Inception IMAX,20.0,Hall A,AVAILABLE,None,None
+CINEMA,102,Interstellar 3D,22.0,Hall B,AVAILABLE,None,None
+CINEMA,103,Oppenheimer 70mm,25.0,Hall A,AVAILABLE,None,None
+CINEMA,104,The Dark Knight,18.0,Hall C,AVAILABLE,None,None
+CINEMA,105,Dune: Part Two,24.0,IMAX 2,AVAILABLE,None,None
+CINEMA,106,Avatar: Way of Water,26.0,IMAX 1,AVAILABLE,None,None
+CINEMA,107,The Matrix,17.0,Hall D,AVAILABLE,None,None
+CINEMA,108,Parasite,19.0,Hall B,AVAILABLE,None,None
+CINEMA,109,Mad Max: Fury Road,21.0,Hall C,AVAILABLE,None,None
+MATCH,110,Champions League Final,50.0,National Stadium,AVAILABLE,None,None
+MATCH,111,Derby Cup Match,40.0,City Arena,AVAILABLE,None,None
+MATCH,112,Premier League Clash,45.0,North Stadium,AVAILABLE,None,None
+MATCH,113,World Cup Qualifier,55.0,Olympic Arena,AVAILABLE,None,None
+MATCH,114,Super Cup Final,60.0,Grand Stadium,AVAILABLE,None,None
+MATCH,115,National Cup Semi-Final,38.0,East Stadium,BOOKED,حخحخ,123456789
+MATCH,116,International Friendly,35.0,West Arena,AVAILABLE,None,None
+MATCH,117,Continental Cup,48.0,Central Stadium,AVAILABLE,None,None
+VIP,118,VIP Gala Concert,100.0,Backstage + Lounge,AVAILABLE,None,None
+VIP,119,VIP Box Match Pass,120.0,Royal Box,AVAILABLE,None,None
+VIP,120,VIP Cinema Premiere,80.0,Red Carpet + Dinner,AVAILABLE,None,None
+VIP,121,VIP Symphony Night,95.0,Front Row + Lounge,AVAILABLE,None,None
+VIP,122,VIP Championship Suite,150.0,Skyline Suite,AVAILABLE,None,None
+VIP,123,VIP Jazz Festival,85.0,VIP Terrace,AVAILABLE,None,None
+VIP,124,VIP Comedy Gala,75.0,Platinum Table,AVAILABLE,None,None
+VIP,125,VIP Grand Finale Pass,180.0,All-Access Suite,AVAILABLE,None,None
